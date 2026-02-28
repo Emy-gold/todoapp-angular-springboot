@@ -1,4 +1,4 @@
-package org.codetutorial.todorestapi;
+package org.codetutorial.todorestapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.codetutorial.todorestapi.model.Todo;
