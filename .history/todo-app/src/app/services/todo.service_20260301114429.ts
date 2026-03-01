@@ -30,8 +30,4 @@ export class TodoService {
   updateTodo(todo : Todo, id : number) : Observable<Todo>{
     return this.http.put<Todo>(`${this.apiUrl}/${id}`,todo);
   }
-
-  deleteTodo(id : number) : Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
 }
