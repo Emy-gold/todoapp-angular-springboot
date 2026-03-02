@@ -24,6 +24,7 @@ export class TodoListComponent implements OnInit{
     this.loadTodos();
   }
 
+  //load the data using getAllTodos
   loadTodos() : void {
     this.isLoading = true;
     this.todoService.getAllTodos().subscribe({
@@ -31,6 +32,16 @@ export class TodoListComponent implements OnInit{
       error: () => { this.errorMessage = 'Failed to load. Is the backeng running?';
         this.isLoading = false;
       }
+    });
+  }
+
+  //Add the data
+  addTodo() : void {
+    if(!this.newTodo.title.trim()) return;
+    this.todoService.createTodo(this.newTodo).subscribe({
+      next: (created) => { this.todos.push(created);
+        this.newTodo = this.emptyTodo();},
+      error: () => { this.errorMessage = 'Failed to create todo.';}
     });
   }
 
