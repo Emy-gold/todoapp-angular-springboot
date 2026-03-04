@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/todo';
 import { TodoService } from '../services/todo.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [],
+  imports: [FormsModule,CommonModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
   standalone: true
@@ -41,7 +43,9 @@ export class TodoListComponent implements OnInit{
     this.todoService.createTodo(this.newTodo).subscribe({
       next: (created) => { this.todos.push(created);
         this.newTodo = this.emptyTodo();},
-      error: () => { this.errorMessage = 'Failed to create todo.';}
+      error: (err) => {
+        console.error("Create Todo Error:", err);
+        this.errorMessage = 'Failed to create todo.';}
     });
   }
 

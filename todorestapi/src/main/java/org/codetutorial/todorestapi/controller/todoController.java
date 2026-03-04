@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = "http://localhost:/4200") // Allow the angular to call us
+@CrossOrigin(origins = "http://localhost:4200") // Allow the angular to call us
 @RequiredArgsConstructor
 public class todoController {
 
