@@ -45,6 +45,40 @@ export class TodoListComponent implements OnInit{
     });
   }
 
+  startEdit(todo : Todo) : void {
+    this.editingTodo = {...todo};
+  }
+
+  saveEdit() : void {
+    if (!this.editingTodo?.id) return;
+    this.todoService.updateTodo(this.editingTodo, this.editingTodo.id).subscribe({
+      next: (updated) => {
+        const i = this.todos.findIndex(t => t.id === updated.id);
+        if(i !== -1) this.todos[i] = updated;
+        this.editingTodo = null;
+      }
+    });
+  }
+
+  toggleComplete(todo : Todo) : void{
+    const toggled = {...todo, completed: !todo.completed};
+    this.todoService.updateTodo(toggled, todo.id!).subscribe({
+      next: (updated) =>{
+        const i = this.todos.findIndex(t => t.id === updated.id);
+        if (i !== -1 ) this.todos[i] = updated;
+      }
+    });
+  }
+
+  deleteTodo(id: number | undefined) : void{
+    if( !id || !confirm('Delete this todo?')) return;
+    this.todoService.deleteTodo(id).subscribe({
+      next: () => {this.todos = this.todos.filter(t => t.id !== id);}
+    });
+  }
+
+  cancelEdit(): void {this.editingTodo = null;}
+
   private emptyTodo() : Todo {
     return { title: '',description: '', completed: false};
   }
