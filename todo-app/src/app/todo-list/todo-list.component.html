@@ -20,4 +20,33 @@
       class="bg-primary-default hover:bg-primary-hover transition-colors mt-3 w-full py-2 text-white text-lg rounded-lg"
       (click)="addTodo()">+Add Task</button>
   </div>
+
+  <div *ngIf="isLoading" class="text-center text-indigo-300 p-5">Loading...</div>
+  <div *ngIf="!isLoading && todos.length === 0" class="text-center text-indigo-400 p-10 text-xl">
+    No tasks yet! Add one above.
+  </div>
+
+  <div>
+    <div *ngFor="let todo of todos" class="">
+      <!--Display mode -->
+      <ng-container *ngIf="editingTodo?.id !== todo.id">
+        <div>
+          <input type="checkbox" [checked]="todo.completed" (change)="toggleComplete(todo)" />
+          <div>
+            <p class="font-semibold mb-1">{{ todo.title }}</p>
+            <p class="text-[#6B7280] text-xs">{{ todo.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="editingTodo?id === todo.id">
+        <input [(ngModel)]="editingTodo!.title" class="" placeholder="Title" />
+        <input [(ngModel)]="editingTodo!.description" class="" placeholder="Description" />
+        <div>
+          <button (click)="saveEdit()">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>
