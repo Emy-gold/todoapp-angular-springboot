@@ -1,11 +1,30 @@
 <body class="bg-pink-50 font-display text-slate-900 antialiased min-h-screen">
-  <main>
-    <div>
-      <div>
-        <span>task-alt</span>
+  <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+    <!--Error message display-->
+    <div *ngIf="errorMessage">
+      {{ errorMessage }}
+      <button (click)="errorMessage = ''">X</button>
+    </div>
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center justify-center size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+        <span class="material-symbols-outlined text-3xl">task</span>
       </div>
-      <h1>My Tasks</h1>
-      <p>Stay focused. stay pink.</p>
+      <h1 class="text-4xl font-black text-slate-900 tracking-tight">My Tasks</h1>
+      <p class="text-primary font-medium mt-2 ">Stay focused. stay pink.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border-primary/10 border-2 md-12 shdow-sm">
+      <!--Add form-->
+      <form class="flex flex-col md:flex-row gap-3">
+        <input [(ngModel)]="newTodo.title" placeholder="please enter the title..." class="border-2 border-primary/10 px-4 py-3 rounded-xl focus:border-primary focus:ring-0 transition-colors text-slate-700
+          placeholder:text-slate-400 focus:outline-none" />
+        <input [(ngModel)]="newTodo.description" placeholder="add a description..." class="border-2 border-primary/10 px-4 py-3 rounded-xl focus:border-primary focus:ring-0 transition-colors text-slate-700
+          placeholder:text-slate-400 focus:outline-none" />
+        <button (click)="addTodo()"
+          class="bg-primary text-white rounded-xl px-6 font-bold transition-all shadow-md shadow-primary/10 hover:bg-primary-hover py-3">+
+          Add
+          Task</button>
+      </form>
     </div>
   </main>
 </body>
