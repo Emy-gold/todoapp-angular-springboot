@@ -13,9 +13,9 @@
       <h1 class="text-4xl font-black text-slate-900 tracking-tight">My Tasks</h1>
       <p class="text-primary font-medium mt-2 ">Stay focused. stay pink.</p>
     </div>
-    <div class="bg-white p-6 rounded-xl border-primary/10 border-2 md-12 shdow-sm">
+    <div class="bg-white p-6 rounded-xl border-primary/10 border-2 mb-12 shdow-sm">
       <!--Add form-->
-      <form class="flex flex-col md:flex-row gap-3">
+      <div class="flex flex-col md:flex-row gap-3">
         <input [(ngModel)]="newTodo.title" placeholder="please enter the title..." class="border-2 border-primary/10 px-4 py-3 rounded-xl focus:border-primary focus:ring-0 transition-colors text-slate-700
           placeholder:text-slate-400 focus:outline-none" />
         <input [(ngModel)]="newTodo.description" placeholder="add a description..." class="border-2 border-primary/10 px-4 py-3 rounded-xl focus:border-primary focus:ring-0 transition-colors text-slate-700
@@ -24,7 +24,32 @@
           class="bg-primary text-white rounded-xl px-6 font-bold transition-all shadow-md shadow-primary/10 hover:bg-primary-hover py-3">+
           Add
           Task</button>
-      </form>
+      </div>
+    </div>
+    <div>
+      <div *ngIf="isLoading" class="p-5">Loading...</div>
+      <div *ngIf="!isLoading && todos.length === 0" class="p-5 text-xl text-center text-slate-400 bg-gray-100">No tasks
+        yet! Add
+        one above.</div>
+    </div>
+    <!--ADD THE DISPLAY -->
+    <div class="flexitems-center gap-2 my-4 w-full ">
+      <div *ngFor="let todo of todos" [class.completed]="todo.completed"
+        class="flex-1 flex-col md:flex-row mb-2 border-2 border-primary/5 rounded-xl">
+        <!--Display mode-->
+        <ng-container *ngIf="editingTodo?.id !== todo.id">
+          <div class="bg-white flex flex-row gap-4 items-center cursor-pointer rounded-xl px-4 py-4">
+            <input type="checkbox" [checked]="todo.completed" (change)="toggleComplete"
+              class="peer h-6 w-6 border-2 rounded-full appearance-none border-primary/20 text-primary checked:bg-primary checked:border-primary focus:outline-none focus:ring-0 focus-offset-0 transition-all" />
+            <div>
+              <div>
+                <p class="font-semibold text-slate-900 text-xl">{{ todo.title }}</p>
+                <p class="text-slate-500">{{ todo.description }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </main>
 </body>
