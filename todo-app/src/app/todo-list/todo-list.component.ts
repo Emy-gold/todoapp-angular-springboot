@@ -13,10 +13,9 @@ import { CommonModule } from '@angular/common';
 })
 export class TodoListComponent implements OnInit{
 
-  //The
   todos :Todo[] = [];
   newTodo: Todo = this.emptyTodo();
-  editingTodo: Todo| null = null;
+  editingTodo: Todo | null = null;
   isLoading = false;
   errorMessage = '';
 

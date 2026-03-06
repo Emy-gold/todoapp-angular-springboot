@@ -6,15 +6,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          default: "#3A9AFF",
-          hover: "#9CD5FF",
-        }
-      }
+        "primary": "#ee2b8c",
+        "primary-hover": "#d41b78",
+        "background-light": "#fdf8fa",
+      },
+      fontFamily: {
+        "display": ["Inter"]
+      },
     },
-  },
-  plugins: [
+    plugins: [
 
-  ],
+    ],
+  }
 }
-
